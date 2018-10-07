@@ -1,5 +1,3 @@
-# ClientAddressBook
-
 <h1>Client Manager Application with PHP</h1>
 <p>Functionality</p>
 <ul>
