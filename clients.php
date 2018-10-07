@@ -13,6 +13,14 @@ include('includes/connection.php');
 $query = "SELECT * FROM clients";
 $result = mysqli_query($conn, $query);
 
+// check for query string
+if(isset($_GET['alert'])) {
+    // new client added
+    if($_GET['alert'] == 'success') {
+        $alertMessage = '<div class="alert alert-success">New client added! <a class="close" data-dismiss="alert">&times;</a></div>';
+    }
+}
+
 // close the connection
 mysqli_close($conn);
 
@@ -20,6 +28,7 @@ include('includes/header.php');
 ?>
 
     <h1>Client Address Book</h1>
+    <?php echo $alertMessage; ?>
 
     <table class="table table-striped table-bordered">
         <tr>
@@ -40,9 +49,9 @@ include('includes/header.php');
                     
                     echo "<td>". $row['name']. "</td><td>". $row['email']. "</td><td>". $row['phone']. "</td><td>". $row['address']. "</td><td>". $row['company']. "</td><td>". $row['notes']. "</td>";
                     
-                    echo '<td><a href="edit.php?id=' . $row['id']. '" type = "button" class="btn btn-primary btn-sm>
+                    echo '<td><a href="edit.php?id='. $row['id']. ' type = "button" class="btn btn-primary btn-sm">
                     <span class="glyphicon glyphicon-edit"></span>
-                    </a>"</td>';
+                    </a></td>';
                     echo "</tr>";
                 }
                 
