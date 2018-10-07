@@ -47,7 +47,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <p class="navbar-text">Aloha, Melina!</p>
+                        <p class="navbar-text">Hello, Melina!</p>
 
                         <li><a href="logout.php">Log out</a></li>
                     </ul>
