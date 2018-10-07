@@ -9,7 +9,7 @@
     <li>Delete existing client</li>
     <li>Log out</li>
 </ul>
-<p>Built using:</p>
+<p>Built with:</p>
 <ul>
     <li>MAMP</li>
     <li>phpmyadmin</li>
