@@ -18,6 +18,12 @@ if(isset($_GET['alert'])) {
     // new client added
     if($_GET['alert'] == 'success') {
         $alertMessage = '<div class="alert alert-success">New client added! <a class="close" data-dismiss="alert">&times;</a></div>';
+    } elseif($_GET['alert'] == 'updatesuccess') {
+        // client updated
+        $alertMessage = '<div class="alert alert-success">Client updated! <a class="close" data-dismiss="alert">&times;</a></div>';
+    } elseif($_GET['alert'] == 'deleted') {
+        // client deleted
+        $alertMessage = '<div class="alert alert-success">Client deleted! <a class="close" data-dismiss="alert">&times;</a></div>';
     }
 }
 

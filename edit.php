@@ -32,12 +32,60 @@ if(mysqli_num_rows($result)>0) {
     $alertMessage = '<div class="alert alert-warning">Nothing to see here. <a href="clients.php">Head back</a>.</div>';
 }
 
+// if the update button is pressed
+if(isset($_POST['update'])) {
+    // set variables
+    $clientName = validateFormData($_POST['clientName']);
+    $clientEmail = validateFormData($_POST['clientEmail']);
+    $clientPhone = validateFormData($_POST['clientPhone']);
+    $clientAddress = validateFormData($_POST['clientAddress']);
+    $clientCompany = validateFormData($_POST['clientCompany']);
+    $clientNotes = validateFormData($_POST['clientNotes']);
+    
+    // new DB query result
+    $query = "UPDATE clients SET name='$clientName', email='$clientEmail', phone='$clientPhone', address='$clientAddress', company='$clientCompany', notes='$clientNotes' WHERE id='$clientID'";
+    $result = mysqli_query($conn, $query);
+    if($result) {
+        header("Location: clients.php?alert=updatesuccess");
+    } else {
+        // error updating the record
+        echo "Error updating record: ". mysqli_error($conn);
+    }
+}
+
+// if delete button was pressed
+if(isset($_POST['delete'])) {
+$alertMessage = "<div class='alert alert-danger'>
+                        <p>Are you sure you want to delete this client?</p><br>
+                        <form action='". htmlspecialchars( $_SERVER["PHP_SELF"] ) ."?id=$clientID' method='post'>
+                            <input type='submit' class='btn btn-danger btn-sm' name='confirm-delete' value='Yes, delete.'>
+                            <a type='button' class='btn btn-default btn-sm' data-dismiss='alert'>No, thanks.</a>
+                        </form>
+                    </div>";
+}
+
+// if confirm-delete button was pressed
+if(isset($_POST['confirm-delete'])) {
+    // new query & result
+    $query = "DELETE FROM clients WHERE id='$clientID'";
+    $result = mysqli_query($conn, $query);
+    // if the delete happened
+    if($result) {
+        // redirent to clients page
+        header("Location: clients.php?alert=deleted");
+    } else {
+        echo "Error updating record: ". mysqli_error($conn);
+    }
+}
+
+mysqli_close($conn);
+
 include('includes/header.php');
 ?>
 
     <h1>Edit Client</h1>
-
-    <form action="clients.php" method="post" class="row">
+    <?php echo $alertMessage; ?>
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>?id=<?php echo $clientID; ?>" method="post" class="row">
         <div class="form-group col-sm-6">
             <label for="client-name">Name</label>
             <input type="text" class="form-control input-lg" id="client-name" name="clientName" value="<?php echo $clientName; ?>">
