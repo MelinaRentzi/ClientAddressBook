@@ -1,4 +1,4 @@
-<h1>Client Manager Application with PHP</h1>
+<h1>Client Manager Application with PHP and SQL</h1>
 <p>Functionality</p>
 <ul>
     <li>Log in</li>
